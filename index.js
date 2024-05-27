@@ -17,7 +17,25 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    return Recipe.findOneAndUpdate(
+      { title: 'Rigatoni alla Genovese' },
+      { duration: 100 }
+    );
   })
+  .then(() => {
+    console.log('Recipe "Rigatoni alla Genovese" updated successfully!');
+  })
+  .then(() => {
+    return Recipe.deleteOne({ title: 'Carrot Cake' });
+  })
+  .then(() => {
+    console.log('Recipe "Carrot Cake" removed successfully!');
+  })
+  .then(() => {
+    mongoose.connection.close();
+    console.log('Database connection closed.');
+  })
+
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
